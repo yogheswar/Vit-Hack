@@ -6,10 +6,12 @@ import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { User, Mail, Phone, MapPin, Camera, Save } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Settings = () => {
     const { toast } = useToast();
     const [loading, setLoading] = useState(false);
+    const { t } = useLanguage();
 
     const handleSave = () => {
         setLoading(true);
@@ -17,8 +19,8 @@ const Settings = () => {
         setTimeout(() => {
             setLoading(false);
             toast({
-                title: "Settings saved",
-                description: "Your profile information has been updated successfully.",
+                title: t('settings_saved'),
+                description: t('profile_updated'),
             });
         }, 1000);
     };
@@ -32,8 +34,8 @@ const Settings = () => {
                 <div className="flex-1 p-8 overflow-y-auto">
                     <div className="max-w-4xl mx-auto space-y-8">
                         <div>
-                            <h2 className="font-display text-3xl font-bold text-foreground mb-2">Settings</h2>
-                            <p className="text-muted-foreground">Manage your account settings and preferences.</p>
+                            <h2 className="font-display text-3xl font-bold text-foreground mb-2">{t('settings')}</h2>
+                            <p className="text-muted-foreground">{t('manage_account')}</p>
                         </div>
 
                         <div className="glass rounded-2xl p-8 space-y-8">
@@ -42,8 +44,8 @@ const Settings = () => {
                                     <User className="h-6 w-6 text-primary-foreground" />
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-semibold">Profile Information</h3>
-                                    <p className="text-sm text-muted-foreground">Update your photo and personal details.</p>
+                                    <h3 className="text-xl font-semibold">{t('profile_information')}</h3>
+                                    <p className="text-sm text-muted-foreground">{t('update_photo_details')}</p>
                                 </div>
                             </div>
 
@@ -62,11 +64,11 @@ const Settings = () => {
                                     </button>
                                 </div>
                                 <div className="space-y-1">
-                                    <h4 className="font-medium">Profile Photo</h4>
-                                    <p className="text-sm text-muted-foreground">Recommended: Square JPG, PNG. Max 2MB.</p>
+                                    <h4 className="font-medium">{t('profile_photo')}</h4>
+                                    <p className="text-sm text-muted-foreground">{t('recommended_format')}</p>
                                     <div className="flex gap-2 mt-2">
-                                        <Button variant="outline" size="sm">Change</Button>
-                                        <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">Remove</Button>
+                                        <Button variant="outline" size="sm">{t('change')}</Button>
+                                        <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">{t('remove')}</Button>
                                     </div>
                                 </div>
                             </div>
@@ -74,35 +76,35 @@ const Settings = () => {
                             {/* Form Fields */}
                             <div className="grid gap-6 md:grid-cols-2">
                                 <div className="space-y-2">
-                                    <Label htmlFor="firstName">First Name</Label>
+                                    <Label htmlFor="firstName">{t('first_name')}</Label>
                                     <div className="relative">
                                         <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                                         <Input id="firstName" defaultValue="Alex" className="pl-9" />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="lastName">Last Name</Label>
+                                    <Label htmlFor="lastName">{t('last_name')}</Label>
                                     <div className="relative">
                                         <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                                         <Input id="lastName" defaultValue="Morgan" className="pl-9" />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="email">Email Address</Label>
+                                    <Label htmlFor="email">{t('email_address')}</Label>
                                     <div className="relative">
                                         <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                                         <Input id="email" type="email" defaultValue="alex.morgan@example.com" className="pl-9" />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="phone">Phone Number</Label>
+                                    <Label htmlFor="phone">{t('phone_number')}</Label>
                                     <div className="relative">
                                         <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                                         <Input id="phone" type="tel" defaultValue="+1 (555) 000-0000" className="pl-9" />
                                     </div>
                                 </div>
                                 <div className="col-span-2 space-y-2">
-                                    <Label htmlFor="address">Address</Label>
+                                    <Label htmlFor="address">{t('address')}</Label>
                                     <div className="relative">
                                         <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                                         <Input id="address" defaultValue="123 Solar Street, Sunnyvale, CA 94086" className="pl-9" />
@@ -111,12 +113,12 @@ const Settings = () => {
                             </div>
 
                             <div className="pt-6 border-t border-border/50 flex justify-end gap-4">
-                                <Button variant="ghost">Cancel</Button>
+                                <Button variant="ghost">{t('cancel')}</Button>
                                 <Button onClick={handleSave} variant="solar" disabled={loading}>
-                                    {loading ? "Saving..." : (
+                                    {loading ? t('saving') : (
                                         <>
                                             <Save className="mr-2 h-4 w-4" />
-                                            Save Changes
+                                            {t('save_changes')}
                                         </>
                                     )}
                                 </Button>

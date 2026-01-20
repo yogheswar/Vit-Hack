@@ -14,16 +14,19 @@ import { SolarLogo } from "@/components/SolarLogo";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
-const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
-  { icon: AlertTriangle, label: "Defects", path: "/defects" },
-  { icon: BarChart3, label: "Analytics", path: "/analytics" },
-  { icon: Settings, label: "Settings", path: "/settings" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const DashboardSidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
+
+  const menuItems = [
+    { icon: LayoutDashboard, label: t('dashboard'), path: "/dashboard" },
+    { icon: AlertTriangle, label: t('defects'), path: "/defects" },
+    { icon: BarChart3, label: t('analytics'), path: "/analytics" },
+    { icon: Settings, label: t('settings'), path: "/settings" },
+  ];
 
   return (
     <aside
@@ -82,14 +85,14 @@ export const DashboardSidebar = () => {
           className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-secondary transition-all"
         >
           <HelpCircle className="h-5 w-5 flex-shrink-0" />
-          {!collapsed && <span className="font-medium">Help</span>}
+          {!collapsed && <span className="font-medium">{t('help')}</span>}
         </Link>
         <Link
           to="/login"
           className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all"
         >
           <LogOut className="h-5 w-5 flex-shrink-0" />
-          {!collapsed && <span className="font-medium">Sign Out</span>}
+          {!collapsed && <span className="font-medium">{t('sign_out')}</span>}
         </Link>
       </div>
     </aside>
